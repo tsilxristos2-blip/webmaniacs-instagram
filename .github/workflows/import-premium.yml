@@ -1,0 +1,30 @@
+name: Import premium WEBMANIACS Instagram concepts
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/import_premium.py'
+      - '.github/workflows/import-premium.yml'
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install Pillow==11.3.0
+      - run: python scripts/import_premium.py
+      - name: Commit premium designs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images/instagram/*-premium.jpg
+          if ! git diff --cached --quiet; then
+            git commit -m "Add four premium WEBMANIACS Instagram images"
+            git pull --rebase origin main
+            git push
+          fi
