@@ -1,0 +1,26 @@
+name: Import bridal atelier Instagram concept
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/import_bridal.py'
+      - '.github/workflows/import-bridal.yml'
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/import_bridal.py
+      - name: Commit image
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images/instagram/bridal-atelier-premium.jpg
+          if ! git diff --cached --quiet; then
+            git commit -m "Add bridal atelier Instagram artwork"
+            git pull --rebase origin main
+            git push
+          fi
