@@ -25,3 +25,5 @@ for name,(x0,y0,x1,y1) in panels:
     out=outdir/f"{name}-professional-premium.jpg"
     bg.save(out,"JPEG",quality=94,optimize=True)
     print(out,out.stat().st_size)
+
+# Refresh professional image export.
