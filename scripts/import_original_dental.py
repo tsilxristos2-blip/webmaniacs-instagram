@@ -10,3 +10,5 @@ with urlopen(URL,timeout=40) as r:
 im=Image.open(BytesIO(data)).convert("RGB")
 im.save(out,"JPEG",quality=94,optimize=True)
 print(f"Saved original supplied dental design: {out}, {im.size}")
+
+# Import source image unchanged in composition.
