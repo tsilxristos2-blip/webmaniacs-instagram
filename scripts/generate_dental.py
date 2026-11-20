@@ -47,3 +47,5 @@ out=Path("images/instagram/dental-care-concept.jpg")
 out.parent.mkdir(parents=True,exist_ok=True)
 im.save(out,"JPEG",quality=92,optimize=True)
 print(out)
+
+# Trigger automated image generation on the main branch.
