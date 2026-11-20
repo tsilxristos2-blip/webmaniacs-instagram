@@ -13,3 +13,5 @@ for name,url in FILES:
     img.save(path,"JPEG",quality=94,optimize=True)
     assert Image.open(path).size==(1080,1080)
     print(name,img.size,path.stat().st_size)
+
+# Retry corrected full-square export.
